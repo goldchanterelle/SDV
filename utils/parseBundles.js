@@ -2,6 +2,7 @@
 
 const camel = require('./camelCase')
 const chunkedArr = require('./arrChunk')
+const fs = require('fs')
 
 async function bundleParse () {
     const data = await grabData('Bundles')
@@ -13,9 +14,10 @@ async function bundleParse () {
     return BUNDLES
 }
 
-async function grabData (fileName) {
-    const src = require(`../data/src/${fileName}`)
-    return src 
+function grabData(fileName) {
+  const path = `./data/src/${fileName}.json`;
+  const data = fs.readFileSync(path);
+  return data;
 }
 
 function bundleNameGrabs(data) {
